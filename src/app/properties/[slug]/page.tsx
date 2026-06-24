@@ -1,4 +1,5 @@
-import Image from "next/image";
+
+import PropertyGallery from "@/components/properties/property-gallery";import Image from "next/image";
 import { getPropertyImages } from "@/core/lib/property";
 import Link from "next/link";
 import { getPropertyBySlug } from "@/core/lib/property";
@@ -32,30 +33,10 @@ console.log("Images:", images);
       </Link>
 
      {images.length > 0 && (
-  <div className="mb-8">
-    <Image
-      src={images[0].url}
-      alt={property.title}
-      width={1200}
-      height={700}
-      className="rounded-xl w-full h-[450px] object-cover"
-    />
-
-    {images.length > 1 && (
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-        {images.slice(1).map((image) => (
-          <Image
-            key={image.id}
-            src={image.url}
-            alt={property.title}
-            width={300}
-            height={200}
-            className="rounded-lg h-32 w-full object-cover"
-          />
-        ))}
-      </div>
-    )}
-  </div>
+  <PropertyGallery
+    images={images}
+    title={property.title}
+  />
 )}
 
       <h1 className="text-4xl font-bold mt-4">
