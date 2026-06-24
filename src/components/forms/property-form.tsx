@@ -2,8 +2,16 @@
 
 import { useState } from "react";
 import { supabase } from "@/core/lib/supabase-client";
+import {
+  uploadPropertyImage,
+  getImageUrl,
+} from "@/core/lib/storage";
+
 
 export default function PropertyForm() {
+  const [image, setImage] = useState<File | null>(
+  null
+);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -14,47 +22,81 @@ export default function PropertyForm() {
   const [city, setCity] = useState("");
   const [state, setStateValue] = useState("");
 
-  async function handleSubmit(
-    e: React.FormEvent<HTMLFormElement>
-  ) {
-    e.preventDefault();
+   async function handleSubmit(
+  e: React.FormEvent
+) {
+  e.preventDefault();
 
-    const slug = title
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-");
+  const slug = title
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-");
 
-    const { error } = await supabase
-      .from("properties")
-      .insert({
-        title,
-        slug,
-        description,
-        property_type: propertyType,
-        status: "AVAILABLE",
-        price: Number(price),
-        area_sqft: Number(areaSqft),
-        address,
-        city,
-        state,
-      });
+  const { data, error } = await supabase
+    .from("properties")
+    .insert({
+      title,
+      slug,
+      description,
+      property_type: propertyType,
+      status: "AVAILABLE",
+      price: Number(price),
+      area_sqft: Number(areaSqft),
+      address,
+      city,
+      state,
+    })
+    .select()
+    .single();
 
-    if (error) {
-      console.error(error);
-      alert(error.message);
-      return;
-    }
-
-    alert("Property created successfully!");
-
-    setTitle("");
-    setDescription("");
-    setPrice("");
-    setAreaSqft("");
-    setAddress("");
-    setCity("");
-    setStateValue("");
+  if (error) {
+    console.error(error);
+    alert(error.message);
+    return;
   }
+
+  if (image && data) {
+    try {
+      const fileName = `${Date.now()}-${image.name}`;
+
+      await uploadPropertyImage(
+        image,
+        fileName
+      );
+
+      const imageUrl =
+        getImageUrl(fileName);
+
+      const { error: imageError } =
+        await supabase
+          .from("property_images")
+          .insert({
+            property_id: data.id,
+            url: imageUrl,
+            public_id: fileName,
+            is_primary: true,
+            display_order: 1,
+          });
+
+      if (imageError) {
+        console.error(imageError);
+      }
+    } catch (uploadError) {
+      console.error(uploadError);
+    }
+  }
+
+  alert("Property created successfully!");
+
+  setTitle("");
+  setDescription("");
+  setPrice("");
+  setAreaSqft("");
+  setAddress("");
+  setCity("");
+  setStateValue("");
+  setImage(null);
+}
 
   return (
     <form
@@ -195,6 +237,30 @@ export default function PropertyForm() {
           className="w-full border rounded-lg p-3"
         />
       </div>
+
+       <div>
+  <label className="block mb-2">
+    Property Image
+  </label>
+
+ <input
+  type="file"
+  accept="image/*"
+  className="w-full border rounded-lg p-3"
+  onChange={(e) =>
+    setImage(
+      e.target.files?.[0] || null
+    )
+  }
+/>
+{image && (
+  <p className="text-green-600">
+    Selected: {image.name}
+  </p>
+)}
+</div>
+
+       
 
       <button
         type="submit"

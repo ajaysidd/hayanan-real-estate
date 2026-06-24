@@ -42,3 +42,46 @@ export async function getPropertyImages(
 
   return data;
 }
+
+export async function getPropertyById(
+  id: string
+) {
+  const { data, error } = await supabase
+    .from("properties")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+
+  return data;
+}
+
+export async function updateProperty(
+  id: string,
+  updates: Record<string, unknown>
+) {
+  const { data, error } = await supabase
+    .from("properties")
+    .update(updates)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) throw error;
+
+  return data;
+}
+
+export async function deleteProperty(
+  id: string
+) {
+  const { error } = await supabase
+    .from("properties")
+    .delete()
+    .eq("id", id);
+
+  if (error) throw error;
+
+  return true;
+}

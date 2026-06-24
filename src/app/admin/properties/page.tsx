@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { getProperties } from "@/core/lib/property";
+import PropertyTable from "@/components/dashboard/property-table";
 
-export default function AdminPropertiesPage() {
+export default async function AdminPropertiesPage() {
+  const properties = await getProperties();
+
   return (
     <main className="max-w-7xl mx-auto p-8">
       <div className="flex justify-between items-center mb-8">
@@ -16,9 +20,9 @@ export default function AdminPropertiesPage() {
         </Link>
       </div>
 
-      <p>
-        Property management table will be added here.
-      </p>
+      <PropertyTable
+        properties={properties ?? []}
+      />
     </main>
   );
 }
