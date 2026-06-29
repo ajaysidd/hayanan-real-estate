@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { createInquiry } from "@/core/lib/inquiry";
-
+import { SITE } from "@/core/config/site";
 
 export default function ContactForm() {
 
@@ -25,7 +25,7 @@ async function handleSubmit(
       status: "NEW",
     });
 
-    alert("Inquiry submitted successfully!");
+    alert("SITE.form.sucessMessage");
 
     setName("");
     setEmail("");
@@ -34,7 +34,7 @@ async function handleSubmit(
   } catch (error) {
     console.error(error);
 
-    alert("Failed to submit inquiry.");
+    alert("SITE.form.errorMessage");
   }
 }
 
@@ -44,7 +44,7 @@ async function handleSubmit(
       className="space-y-6"
     >
       <div>
-        <label>Name</label>
+        <label>{SITE.form.nameLabel}</label>
 
         <input
           value={name}
@@ -56,7 +56,7 @@ async function handleSubmit(
       </div>
 
       <div>
-        <label>Email</label>
+        <label>{SITE.form.emailLabel}</label>
 
         <input
           type="email"
@@ -69,7 +69,7 @@ async function handleSubmit(
       </div>
 
       <div>
-        <label>Phone</label>
+        <label>{SITE.form.phoneLabel}</label>
 
         <input
           value={phone}
@@ -81,7 +81,7 @@ async function handleSubmit(
       </div>
 
       <div>
-        <label>Message</label>
+        <label>{SITE.form.messageLabel}</label>
 
         <textarea
           rows={5}
@@ -97,7 +97,7 @@ async function handleSubmit(
         type="submit"
         className="bg-black text-white px-6 py-3 rounded-lg"
       >
-        Send Inquiry
+        {SITE.form.submitButton}
       </button>
     </form>
   );

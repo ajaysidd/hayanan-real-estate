@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
-
+import { SITE } from "@/core/config/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,50 +21,39 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://hayanan.vercel.app"), // change later if you buy a domain
 
   title: {
-    default: "HAYANAN Real Estate",
-    template: "%s | HAYANAN Real Estate",
-  },
+  default: SITE.fullName,
+  template: `%s | ${SITE.fullName}`,
+},
 
-  description:
-    "Premium Real Estate Projects, Farm Lands, Villas and Residential Plots by HAYANAN.",
+  description: SITE.description,
 
-  keywords: [
-    "Real Estate",
-    "Plots",
-    "Farm Lands",
-    "Villas",
-    "Apartments",
-    "HAYANAN",
-  ],
+  keywords: SITE.keywords,
 
   authors: [
+  {
+    name: SITE.name,
+  },
+],
+
+  openGraph: {
+  title: SITE.fullName,
+
+  description: SITE.description,
+
+  url: SITE.url,
+
+  siteName: SITE.fullName,
+
+  images: [
     {
-      name: "HAYANAN",
+      url: SITE.ogImage,
     },
   ],
 
-  openGraph: {
-    title: "HAYANAN Real Estate",
-    description:
-      "Premium Real Estate Projects and Properties.",
+  type: "website",
 
-    url: "https://hayanan.vercel.app",
-
-    siteName: "HAYANAN Real Estate",
-
-    locale: "en_IN",
-
-    type: "website",
-
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "HAYANAN Real Estate",
-      },
-    ],
-  },
+  locale: "en_IN",
+},
 
   twitter: {
     card: "summary_large_image",

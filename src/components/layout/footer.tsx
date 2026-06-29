@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SITE } from "@/core/config/site";
+import { CONTACT } from "@/core/config/contact";
+import { NAVIGATION } from "@/core/config/navigation";
 
 export default function Footer() {
   return (
@@ -9,7 +12,7 @@ export default function Footer() {
         <div className="flex items-center gap-3">
   <Image
     src="/logo.png"
-    alt="HAYANAN Logo"
+    alt={`${SITE.name} Logo`}
     width={60}
     height={60}
     className="rounded-full"
@@ -17,12 +20,12 @@ export default function Footer() {
 
   <div>
     <h2 className="text-2xl font-bold text-white">
-      HAYANAN
-    </h2>
+  {SITE.name}
+</h2>
 
-    <p className="text-gray-400">
-      Premium Real Estate
-    </p>
+<p className="text-gray-400">
+  {SITE.slogan}
+</p>
   </div>
 </div>
 
@@ -30,13 +33,16 @@ export default function Footer() {
           <h3 className="font-semibold mb-4">
             Quick Links
           </h3>
-
           <div className="flex flex-col gap-2">
-            <Link href="/">Home</Link>
-            <Link href="/properties">Properties</Link>
-            <Link href="/projects">Projects</Link>
-            <Link href="/contact">Contact</Link>
-          </div>
+ 
+  {NAVIGATION
+  .filter((item) => item.showInFooter)
+  .map((item) => (
+    <Link key={item.href} href={item.href}>
+      {item.label}
+    </Link>
+  ))}
+</div>
         </div>
 
         <div>
@@ -44,15 +50,16 @@ export default function Footer() {
             Contact
           </h3>
 
-          <p>Email: info@hayanan.com</p>
-          <p>Phone: +91 XXXXX XXXXX</p>
-          <p>Hyderabad, Telangana</p>
+          <p>Email: {CONTACT.email}</p>
+<p>Phone: {CONTACT.phone}</p>
+<p>{CONTACT.address}</p>
         </div>
 
       </div>
 
       <div className="border-t border-gray-700 text-center py-4 text-sm text-gray-400">
-        © {new Date().getFullYear()} HAYANAN Real Estate. All Rights Reserved.
+     © {new Date().getFullYear()} {SITE.copyright.company}.{" "}
+{SITE.copyright.rights}
       </div>
     </footer>
   );

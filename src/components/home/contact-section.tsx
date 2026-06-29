@@ -1,4 +1,5 @@
 import ContactForm from "@/components/forms/contact-form";
+import { SITE } from "@/core/config/site";
 
 export default function ContactSection() {
   return (
@@ -7,12 +8,12 @@ export default function ContactSection() {
       <div className="text-center mb-12">
 
         <h2 className="text-3xl md:text-5xl font-bold">
-          Get In Touch
+            {SITE.contact.title}
         </h2>
 
         <p className="text-gray-600 mt-3">
-          Have questions? Send us a message and we will get back to you shortly.
-        </p>
+  {SITE.contact.subtitle}
+</p>
 
       </div>
 
