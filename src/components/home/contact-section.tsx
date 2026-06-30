@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import {
   Phone,
   Mail,
@@ -95,8 +96,10 @@ export default function ContactSection() {
 
           {/* Contact Form */}
           <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-lg lg:col-span-3">
-            <ContactForm />
-          </div>
+  <Suspense fallback={<p className="text-center py-8">Loading...</p>}>
+    <ContactForm />
+  </Suspense>
+</div>
 
         </div>
 
