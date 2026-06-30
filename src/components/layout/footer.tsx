@@ -125,7 +125,7 @@ export default function Footer() {
 
             <a
               href="#"
-              className="rounded-xl bg-white/10 p-3 transition hover:bg-green-600"
+              className="rounded-xl bg-white/10 p-3 transition hover:bg-blue-800"
             >
               <FaFacebookF size={18} />
             </a>
@@ -139,7 +139,7 @@ export default function Footer() {
 
             <a
               href="#"
-              className="rounded-xl bg-white/10 p-3 transition hover:bg-blue-600"
+              className="rounded-xl bg-white/10 p-3 transition hover:bg-blue-500"
             >
               <FaLinkedinIn size={18} />
             </a>

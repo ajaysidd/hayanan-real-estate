@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
         {/* Heading */}
         <div className="mb-16 text-center">
           <span className="inline-block rounded-full bg-green-100 px-4 py-1 text-sm font-semibold text-green-700">
-            Why HAYANAN
+            Why ABC
           </span>
 
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 md:text-5xl">

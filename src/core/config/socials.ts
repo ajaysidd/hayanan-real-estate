@@ -13,5 +13,5 @@ export const SOCIALS = {
 
   telegram: "#",
 
-  email: "mailto:info@hayanan.com",
+  email: "mailto:info@ABC.com",
 };

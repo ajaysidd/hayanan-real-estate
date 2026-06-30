@@ -1,11 +1,11 @@
 export const CONTACT = {
-  email: "info@hayanan.com",
+  email: "info@ABC.com",
   phone: "+91 XXXXX XXXXX",
   address: "Hyderabad, Telangana",
 
   whatsapp: "+91XXXXXXXXXX",
 
-  supportEmail: "support@hayanan.com",
+  supportEmail: "support@ABC.com",
 
   googleMaps:
     "https://maps.google.com",

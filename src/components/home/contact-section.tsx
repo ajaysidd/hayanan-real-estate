@@ -60,7 +60,7 @@ export default function ContactSection() {
               </h3>
 
               <p className="mt-2 text-gray-600">
-                info@hayanan.com
+                info@ABC.com
               </p>
             </div>
 

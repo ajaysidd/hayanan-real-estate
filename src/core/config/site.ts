@@ -1,8 +1,8 @@
 export const SITE = {
   // Company
-  name: "HAYANAN",
+  name: "ABC",
 
-  fullName: "HAYANAN Real Estate",
+  fullName: "Real Estate",
 
   tagline: "Premium Real Estate",
 
@@ -12,7 +12,7 @@ export const SITE = {
   url: "https://hayanan-real-estate.vercel.app",
 
   // SEO
-  title: "HAYANAN Real Estate",
+  title: "ABC Real Estate",
 
   description:
     "Premium Real Estate Projects, Farm Lands, Villas, Residential Plots and investment opportunities across Telangana. Trusted by hundreds of customers.",
@@ -50,7 +50,7 @@ export const SITE = {
     "Farm Lands",
     "Villas",
     "Apartments",
-    "HAYANAN",
+    "ABC",
   ],
 
   // Images
@@ -61,7 +61,7 @@ export const SITE = {
   ogImage: "/og-image.png",
 
   copyright: {
-  company: "HAYANAN REAL ESTATE",
+  company: "ABC REAL ESTATE",
 
   rights: "All Rights Reserved.",
 },
