@@ -8,13 +8,18 @@ export default function LoginForm() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] =
-    useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
   ) {
     e.preventDefault();
+
+    setLoading(true);
+    setErrorMessage("");
 
     const { error } =
       await supabase.auth.signInWithPassword({
@@ -22,14 +27,15 @@ export default function LoginForm() {
         password,
       });
 
+    setLoading(false);
+
     if (error) {
-      alert(error.message);
+      setErrorMessage(error.message);
       return;
     }
 
-    alert("Login successful!");
-
     router.push("/admin");
+    router.refresh();
   }
 
   return (
@@ -38,40 +44,49 @@ export default function LoginForm() {
       className="space-y-6"
     >
       <div>
-        <label className="block mb-2">
+        <label className="block mb-2 font-medium">
           Email
         </label>
 
         <input
           type="email"
+          required
           value={email}
           onChange={(e) =>
             setEmail(e.target.value)
           }
-          className="w-full border rounded-lg p-3"
+          className="w-full rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
 
       <div>
-        <label className="block mb-2">
+        <label className="block mb-2 font-medium">
           Password
         </label>
 
         <input
           type="password"
+          required
           value={password}
           onChange={(e) =>
             setPassword(e.target.value)
           }
-          className="w-full border rounded-lg p-3"
+          className="w-full rounded-lg border p-3 focus:outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
 
+      {errorMessage && (
+        <p className="text-red-600 text-sm">
+          {errorMessage}
+        </p>
+      )}
+
       <button
         type="submit"
-        className="bg-black text-white px-6 py-3 rounded-lg"
+        disabled={loading}
+        className="w-full rounded-lg bg-green-600 py-3 text-white font-semibold transition hover:bg-green-700 disabled:opacity-60"
       >
-        Login
+        {loading ? "Signing In..." : "Login"}
       </button>
     </form>
   );
